@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://simp-api.dev.crymzee.com/api";
+const API_BASE_URL = "";
 let selectedImageFile = null;
 
 const elements = {
@@ -293,3 +293,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.togglePassword = togglePassword;
+
