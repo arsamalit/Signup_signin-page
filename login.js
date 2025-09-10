@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://simp-api.dev.crymzee.com/api";
+const API_BASE_URL = "";
 
  const loginEmail = document.getElementById("loginEmail");
 const loginPassword = document.getElementById("loginPassword");
@@ -122,3 +122,4 @@ function setLoading(buttonElement, isLoading) {
 });
 
  window.togglePassword = togglePassword;
+
