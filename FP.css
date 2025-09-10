@@ -1,0 +1,155 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.main {
+  width: 100%;
+  max-width: 420px;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  width: 100%;
+  padding: 40px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+.container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+}
+
+.inputs {
+  width: 100%;
+  position: relative;
+}
+
+input {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 50px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  outline: none;
+  background: #f8f9fa;
+}
+
+input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+input::placeholder {
+  color: #aaa;
+  letter-spacing: 0.5px;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.message,
+.error-box,
+.ok {
+  margin-top: 10px;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 500;
+  text-align: center;
+  font-size: 14px;
+  display: none;
+}
+
+.error-box,
+.message.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.ok,
+.message.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.message.info {
+  background: #d1ecf1;
+  color: #0c5460;
+}
+
+.loader {
+  display: none;
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #444;
+}
+
+a button {
+  margin-top: 10px;
+  background: #444;
+}
+
+a button:hover {
+  background: #222;
+}
+
+ .fa-eye,
+.fa-eye-slash {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
+ @keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

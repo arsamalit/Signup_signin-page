@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify OTP</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+  <div class="container">
+    <div class="icon-container">
+      <div class="otp-icon">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+    </div>
+
+    <h1 class="title">Verify OTP</h1>
+    <p class="subtitle">
+      We've sent a 6-digit verification code to<br>
+      <span class="email-display" id="otpEmail">your email</span>
+    </p>
+
+    <form id="otpForm">
+      <div class="otp-container">
+        <input type="text" class="otp-input" id="digit1" maxlength="1" autocomplete="one-time-code">
+        <input type="text" class="otp-input" id="digit2" maxlength="1" autocomplete="one-time-code">
+        <input type="text" class="otp-input" id="digit3" maxlength="1" autocomplete="one-time-code">
+        <input type="text" class="otp-input" id="digit4" maxlength="1" autocomplete="one-time-code">
+        <input type="text" class="otp-input" id="digit5" maxlength="1" autocomplete="one-time-code">
+        <input type="text" class="otp-input" id="digit6" maxlength="1" autocomplete="one-time-code">
+      </div>
+
+      <div class="timer-section">
+        <div class="timer" id="otpTimer">
+          <span class="timer-text">Resend code in </span>
+          <span class="countdown" id="countdown">60</span>
+          <span class="timer-text"> seconds</span>
+        </div>
+        <div class="resend-section">
+          <button type="button" class="resend-btn disabled" id="resendBtn">
+            Resend OTP
+          </button>
+        </div>
+      </div>
+
+      <div class="security-note">
+        <i class="fas fa-info-circle"></i>
+        For your security, this code will expire in 10 minutes. Please don't share this code with anyone.
+      </div>
+
+      <div class="button-container">
+        <button type="button" class="back-btn" id="backBtn">Back</button>
+        <button type="submit" class="submit-btn" id="verifyBtn">
+          <span class="btn-text">Verify</span>
+          <span class="loading"><i class="fas fa-spinner fa-spin"></i></span>
+        </button>
+      </div>
+    </form>
+
+    <div class="message" id="otpMessage"></div>
+  </div>
+
+ <script src="otp.js"></script>
+</body>
+</html>

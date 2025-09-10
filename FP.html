@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="FP.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <div class="main">
+
+     <div id="loader" class="loader">Loading...</div>
+    <div id="errorBox" class="error-box"></div>
+    <div id="ok" class="ok"></div>
+
+     <div class="container" id="emailStep">
+      <h2>Forgot Password</h2>
+      <div class="inputs">
+        <input type="email" id="loginEmail" placeholder="Enter your email"/>
+      </div>
+      <button id="verification_btn">Send OTP</button>
+    </div>
+
+     <div class="container" id="otpStep" style="display:none;">
+      <h2>Verify OTP</h2>
+      <div class="inputs">
+        <input type="text" id="otp_code" placeholder="Enter OTP Code" maxlength="6"/>
+      </div>
+      <button id="verify_otp">Verify OTP</button>
+      <button id="resend_otp">Resend OTP</button>  
+      <button id="next_btn" style="display:none;">Next</button>
+    </div>
+
+     <div class="container" id="resetStep" style="display:none;">
+      <h2>Reset Password</h2>
+      <div class="inputs" style="position:relative;">
+        <input type="password" id="Password" placeholder="New Password"/>
+        <i id="toggle_Password" class="fa-regular fa-eye"
+           style="position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;"></i>
+      </div>
+      <div class="inputs" style="position:relative;">
+        <input type="password" id="Confirm_password" placeholder="Confirm Password"/>
+        <i id="toggle_C_Password" class="fa-regular fa-eye"
+           style="position:absolute;right:15px;top:50%;transform:translateY(-50%);cursor:pointer;"></i>
+      </div>
+      <button id="new_password">Change Password</button>
+      <a href="login.html" id="logi" style="display:none;"><button>Back to Login</button></a>
+    </div>
+
+  </div>
+
+<script src="FP.js"></script>
+</body>
+</html>
