@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://simp-api.dev.crymzee.com/api";
+const API_BASE_URL = "";
 let countdown = 60;
 let countdownInterval;
 let otp = [];   
@@ -332,3 +332,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.getElementById('backBtn').addEventListener()
+
