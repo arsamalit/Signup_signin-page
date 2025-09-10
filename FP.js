@@ -1,4 +1,4 @@
-   const API_BASE_URL = "https://simp-api.dev.crymzee.com/api";
+   const API_BASE_URL = "";
 
   const emailInput = document.getElementById("loginEmail");
   const otpInput = document.getElementById("otp_code");
@@ -247,4 +247,5 @@
 
   togglePasswordVisibility("Password", "toggle_Password");
   togglePasswordVisibility("Confirm_password", "toggle_C_Password");
+
  
