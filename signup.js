@@ -94,8 +94,16 @@ function clearImagePreview() {
   selectedImageFile = null;
   checkFormValidity();
 
-  document.getElementById("profileImage").addEventListener("change", handleImageChange);
-  document.getElementById("removeImageBtn").addEventListener("click", clearImagePreview);
+  // Re-attach event listeners after recreating the elements
+  const newProfileImage = document.getElementById("profileImage");
+  const newRemoveBtn = document.getElementById("removeImageBtn");
+  
+  if (newProfileImage) {
+    newProfileImage.addEventListener("change", handleImageChange);
+  }
+  if (newRemoveBtn) {
+    newRemoveBtn.addEventListener("click", clearImagePreview);
+  }
 }
 
 function handleImageChange(e) {
@@ -124,9 +132,14 @@ function handleImageChange(e) {
     `;
     elements.imagePreview.classList.add("has-image");
 
-    document.getElementById("removeImageBtn").addEventListener("click", clearImagePreview);
+    // Re-attach event listener for the remove button
+    const removeBtn = document.getElementById("removeImageBtn");
+    if (removeBtn) {
+      removeBtn.addEventListener("click", clearImagePreview);
+    }
     checkFormValidity();
   };
+  
   reader.readAsDataURL(file);
 }
 
@@ -148,15 +161,31 @@ function convertImageToBase64(file) {
 
 async function sendOTP(email, otpType = "create") {
   try {
+    const requestBody = { email, otp_type: otpType, role: "user" };
+    console.log('Sending OTP request:', requestBody);
+    
     const res = await fetch(`${API_BASE_URL}/otp/send`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, otp_type: otpType, role: "user" }),
+      body: JSON.stringify(requestBody),
     });
 
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch (parseError) {
+      console.log('Failed to parse OTP send response JSON:', parseError);
+      const textResponse = await res.text();
+      console.log('Raw OTP send response:', textResponse);
+      data = { message: 'Invalid response format' };
+    }
+    
+    console.log('OTP send response status:', res.status);
+    console.log('OTP send response data:', data);
+    
     return { success: res.ok, data };
   } catch (err) {
+    console.error('OTP send error:', err);
     return { success: false, error: err.message };
   }
 }
@@ -174,7 +203,7 @@ function checkFormValidity() {
     selectedImageFile &&
     first &&
     last &&
-    user &&
+    user &&           
     email &&
     phone &&
     validatePhoneNumber(phone) &&
@@ -237,18 +266,18 @@ function setupEventListeners() {
     const { firstName, lastName, username, signupEmail, phoneNumber, signupPassword, confirmPassword } =
       elements;
 
-    // ✅ snake_case for backend
+    // Create the payload with consistent field names (using underscores for API consistency)
     const payload = {
       first_name: firstName.value.trim(),
       last_name: lastName.value.trim(),
       username: username.value.trim(),
       email: signupEmail.value.trim(),
-      phone: phoneNumber.value.trim(),
+      phone_number: phoneNumber.value.trim(), // Changed to phone_number for consistency
       password: signupPassword.value,
       confirm_password: confirmPassword.value,
     };
 
-    if (!validatePhoneNumber(payload.phone)) {
+    if (!validatePhoneNumber(payload.phone_number)) {
       return showMessage("Invalid phone number format.", "error");
     }
     if (payload.password !== payload.confirm_password) {
@@ -264,12 +293,24 @@ function setupEventListeners() {
 
       const result = await sendOTP(payload.email, "create");
       if (result.success) {
-        // ✅ snake_case & profile_image
-        window.signupData = {
-          ...payload,
+        // Store signup data with consistent naming in sessionStorage
+        const signupData = {
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          username: payload.username,
+          email: payload.email,
+          phone_number: payload.phone_number,
+          password: payload.password,
+          confirm_password: payload.confirm_password,
           profile_image: imageBase64,
-          verificationToken: result.data.verification_token,
+          verificationToken: result.data?.verification_token ? String(result.data.verification_token) : null,
         };
+        
+        // Store in both window and sessionStorage for persistence
+        window.signupData = signupData;
+        sessionStorage.setItem('signupData', JSON.stringify(signupData));
+        
+        console.log('Stored signup data:', signupData); // Debug log
         showMessage("OTP sent successfully! Redirecting...", "success");
 
         setTimeout(() => {
@@ -293,4 +334,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 window.togglePassword = togglePassword;
-
